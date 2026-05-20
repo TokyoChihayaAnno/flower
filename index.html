@@ -304,6 +304,14 @@
             gap: 6px;
         }
 
+        .tooltip .tooltip-image {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
         /* ===== 礼物盒 ===== */
         .gift-box {
             position: absolute;
@@ -455,10 +463,12 @@
         }
 
         .love-card .heart-signature {
-            color: #e74c3c;
-            font-size: 1.3rem;
+            color: #ff6b9d;
+            font-size: 1.1rem;
             margin-top: 16px;
             font-family: 'Great Vibes', cursive;
+            text-shadow: 0 0 10px rgba(255,107,157,0.5), 0 2px 4px rgba(0,0,0,0.2);
+            white-space: nowrap;
         }
 
         /* ===== 飘落花瓣 ===== */
@@ -660,11 +670,12 @@
             <div class="love-card" id="loveCard">
                 <h3>2026.1.20-2026.5.20</h3>
                 <p>120天，<br>每天都比昨天更爱你！</p>
-                <div class="heart-signature">❤️ love you forever ❤️</div>
+                <div class="heart-signature">❤️ Love You Forever ❤️</div>
             </div>
         </div>
     </div>
 
+    <script src="base64_data.js"></script>
     <script>
         // ===== 花束配置 =====
         const centerX = 450;
@@ -672,9 +683,17 @@
         const minRadius = 50;
         const maxRadius = 360;
 
+        const flowerPhotoMap = {
+            'tulip-purple': flowerPhotoBase64['tulip-purple'],
+            'tulip-yellow': flowerPhotoBase64['tulip-yellow'],
+            'orchid-purple': flowerPhotoBase64['orchid-purple'],
+            'tulip-orange': flowerPhotoBase64['tulip-orange'],
+            'rose-pink': flowerPhotoBase64['rose-pink']
+        };
+
         const flowerTypes = [
             { type: 'rose-red', name: '红玫瑰', meaning: '热烈的爱', petalClass: 'petal-rose', petalCount: 5, sizeRange: [28, 42], density: 1.0 },
-            { type: 'rose-pink', name: '粉玫瑰', meaning: '温柔的初恋', petalClass: 'petal-rose', petalCount: 5, sizeRange: [26, 40], density: 1.0 },
+            { type: 'rose-pink', name: '粉玫瑰', meaning: '温柔的爱', petalClass: 'petal-rose', petalCount: 5, sizeRange: [26, 40], density: 1.0 },
             { type: 'rose-white', name: '白玫瑰', meaning: '纯洁的爱', petalClass: 'petal-rose', petalCount: 5, sizeRange: [24, 38], density: 1.0 },
             { type: 'rose-orange', name: '香槟玫瑰', meaning: '珍藏的爱', petalClass: 'petal-rose', petalCount: 5, sizeRange: [26, 40], density: 1.0 },
             { type: 'tulip-red', name: '红郁金香', meaning: '完美的爱', petalClass: 'petal-tulip', petalCount: 6, sizeRange: [22, 36], density: 1.0 },
@@ -682,15 +701,15 @@
             { type: 'tulip-pink', name: '粉郁金香', meaning: '幸福的爱', petalClass: 'petal-tulip', petalCount: 6, sizeRange: [22, 36], density: 1.0 },
             { type: 'tulip-purple', name: '紫郁金香', meaning: '神秘的爱', petalClass: 'petal-tulip', petalCount: 6, sizeRange: [22, 36], density: 1.0 },
             { type: 'tulip-orange', name: '橙郁金香', meaning: '热情的爱', petalClass: 'petal-tulip', petalCount: 6, sizeRange: [22, 36], density: 1.0 },
-            { type: 'daisy-white', name: '小雏菊', meaning: '天真无邪', petalClass: 'petal-daisy', petalCount: 8, sizeRange: [14, 24], density: 1.5 },
+            { type: 'daisy-white', name: '小雏菊', meaning: '天真的爱', petalClass: 'petal-daisy', petalCount: 8, sizeRange: [14, 24], density: 1.5 },
             { type: 'daisy-yellow', name: '小黄菊', meaning: '活力青春', petalClass: 'petal-daisy', petalCount: 8, sizeRange: [14, 24], density: 1.5 },
             { type: 'lavender-purple', name: '薰衣草', meaning: '浪漫等待', petalClass: 'petal-lavender', petalCount: 7, sizeRange: [10, 18], density: 2.0 },
             { type: 'lily-white', name: '百合花', meaning: '纯洁高贵', petalClass: 'petal-lily', petalCount: 6, sizeRange: [28, 44], density: 0.8 },
             { type: 'sunflower-yellow', name: '向日葵', meaning: '忠诚追随', petalClass: 'petal-sunflower', petalCount: 10, sizeRange: [24, 38], density: 0.8 },
             { type: 'hydrangea-blue', name: '蓝绣球', meaning: '美满团圆', petalClass: 'petal-hydrangea', petalCount: 8, sizeRange: [12, 22], density: 1.8 },
             { type: 'hydrangea-pink', name: '粉绣球', meaning: '浪漫甜蜜', petalClass: 'petal-hydrangea', petalCount: 8, sizeRange: [12, 22], density: 1.8 },
-            { type: 'carnation-red', name: '红康乃馨', meaning: '热情母爱', petalClass: 'petal-carnation', petalCount: 5, sizeRange: [18, 30], density: 1.2 },
-            { type: 'carnation-pink', name: '粉康乃馨', meaning: '温馨祝福', petalClass: 'petal-carnation', petalCount: 5, sizeRange: [18, 30], density: 1.2 },
+            { type: 'carnation-red', name: '红康乃馨', meaning: '炽热心动', petalClass: 'petal-carnation', petalCount: 5, sizeRange: [18, 30], density: 1.2 },
+            { type: 'carnation-pink', name: '粉康乃馨', meaning: '甜蜜眷恋', petalClass: 'petal-carnation', petalCount: 5, sizeRange: [18, 30], density: 1.2 },
             { type: 'cherry-pink', name: '樱花', meaning: '浪漫爱情', petalClass: 'petal-cherry', petalCount: 5, sizeRange: [16, 28], density: 1.5 },
             { type: 'cherry-white', name: '白樱花', meaning: '纯洁高雅', petalClass: 'petal-cherry', petalCount: 5, sizeRange: [16, 28], density: 1.5 },
             { type: 'orchid-purple', name: '紫罗兰', meaning: '神秘优雅', petalClass: 'petal-orchid', petalCount: 5, sizeRange: [20, 32], density: 1.2 },
@@ -762,6 +781,11 @@
                 "></div>`;
             }).join('');
 
+            const photoSrc = flowerPhotoBase64[flower.type];
+            const tooltipContent = photoSrc 
+                ? `<img src="${photoSrc}" class="tooltip-image" alt="${flower.name}">`
+                : `<h4>🌸 ${flower.name}</h4><p class="meaning"><span>💌</span> ${flower.meaning}</p>`;
+
             flowerEl.innerHTML = `
                 <div class="flower-top" style="
                     width: ${flower.petalSize.width * 2.5}px; 
@@ -777,8 +801,7 @@
                     "></div>
                 </div>
                 <div class="tooltip">
-                    <h4>🌸 ${flower.name}</h4>
-                    <p class="meaning"><span>💌</span> ${flower.meaning}</p>
+                    ${tooltipContent}
                 </div>
             `;
 
