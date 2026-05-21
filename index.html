@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💐 致 盲目吃鱼之神 💐</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Great+Vibes&family=Noto+Serif+SC:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #ffd700;
+            --pink: #ff6b9d;
+            --rose: #e74c3c;
+            --cream: #fff8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: 
+                radial-gradient(ellipse at 20% 80%, rgba(120, 50, 80, 0.4) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(80, 60, 120, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at center, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
+            overflow-x: hidden;
+            font-family: 'Noto Serif SC', 'Playfair Display', serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* ===== 背景光斑 ===== */
+        .ambient-light {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .light-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: orbFloat 20s ease-in-out infinite;
+        }
+
+        .light-orb:nth-child(1) {
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(255,107,157,0.4), transparent);
+            top: 10%; left: 10%;
+            animation-delay: 0s;
+        }
+        .light-orb:nth-child(2) {
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(255,215,0,0.2), transparent);
+            top: 60%; right: 5%;
+            animation-delay: -7s;
+        }
+        .light-orb:nth-child(3) {
+            width: 250px; height: 250px;
+            background: radial-gradient(circle, rgba(165,94,234,0.3), transparent);
+            bottom: 20%; left: 30%;
+            animation-delay: -14s;
+        }
+
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        /* ===== 标题区域 ===== */
+        .header {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            animation: headerDescend 1.5s ease-out both;
+        }
+
+        .recipient {
+            color: var(--gold);
+            font-family: 'Great Vibes', cursive;
+            font-size: 4.5rem;
+            text-shadow: 
+                0 0 20px rgba(255, 215, 0, 0.6),
+                0 0 40px rgba(255, 215, 0, 0.3),
+                0 4px 10px rgba(0,0,0,0.3);
+            letter-spacing: 4px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .recipient::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 10%;
+            width: 80%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            opacity: 0.6;
+        }
+
+        .love-number {
+            color: var(--pink);
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.8rem;
+            text-shadow: 
+                0 0 15px rgba(255, 107, 157, 0.6),
+                0 0 30px rgba(255, 107, 157, 0.3);
+            margin-top: 8px;
+            animation: gentlePulse 3s ease-in-out infinite;
+        }
+
+        .subtitle {
+            color: rgba(255,255,255,0.7);
+            font-size: 1rem;
+            font-weight: 300;
+            letter-spacing: 8px;
+            margin-top: 12px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        @keyframes headerDescend {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes gentlePulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.03); opacity: 0.9; }
+        }
+
+        /* ===== 花束容器 ===== */
+        .bouquet-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            height: 680px;
+            z-index: 5;
+        }
+
+        .bouquet-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* ===== 包装纸 ===== */
+        .wrapper-paper {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 320px;
+            height: 280px;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .wrapper-paper::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 280px;
+            height: 200px;
+            background: linear-gradient(135deg, 
+                rgba(255,255,255,0.12) 0%, 
+                rgba(255,228,225,0.08) 50%,
+                rgba(255,255,255,0.12) 100%);
+            clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+            backdrop-filter: blur(2px);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .wrapper-paper::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 240px;
+            height: 180px;
+            background: linear-gradient(to bottom, 
+                rgba(232, 67, 147, 0.06), 
+                rgba(255, 215, 0, 0.04));
+            clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 0% 100%);
+        }
+
+        .wrapper-ribbon {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 200px;
+            background: linear-gradient(to right, 
+                rgba(255,215,0,0.25), 
+                rgba(255,215,0,0.4), 
+                rgba(255,215,0,0.25));
+            z-index: 2;
+            filter: blur(1px);
+            pointer-events: none;
+        }
+
+        /* ===== 花朵基础 ===== */
+        .flower {
+            position: absolute;
+            cursor: pointer;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
+            animation: bloomIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both, 
+                       sway 4s ease-in-out infinite;
+            will-change: transform;
+        }
+
+        .flower:hover {
+            transform: scale(1.4) !important;
+            z-index: 1000 !important;
+            filter: brightness(1.25) drop-shadow(0 0 15px rgba(255,255,255,0.4));
+        }
+
+        .flower.highlight {
+            z-index: 900 !important;
+        }
+
+        .flower-top {
+            position: relative;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
+        }
+
+        .petal {
+            position: absolute;
+            transition: all 0.3s ease;
+            box-shadow: inset -2px -2px 4px rgba(0,0,0,0.1), inset 2px 2px 4px rgba(255,255,255,0.3);
+        }
+
+        .flower-center {
+            position: absolute;
+            border-radius: 50%;
+            z-index: 5;
+            box-shadow: inset -2px -2px 4px rgba(0,0,0,0.2), 0 2px 4px rgba(0,0,0,0.15);
+        }
+
+        .flower-sparkle {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            pointer-events: none;
+            z-index: 6;
+        }
+
+        .flower-sparkle::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 6px;
+            height: 6px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow:
+                0 -16px 2px -1px rgba(255,255,255,0.9),
+                0 16px 2px -1px rgba(255,255,255,0.9),
+                -16px 0 2px -1px rgba(255,255,255,0.9),
+                16px 0 2px -1px rgba(255,255,255,0.9),
+                -10px -10px 3px -1px rgba(255,215,0,0.5),
+                10px -10px 3px -1px rgba(255,215,0,0.5),
+                -10px 10px 3px -1px rgba(255,215,0,0.5),
+                10px 10px 3px -1px rgba(255,215,0,0.5),
+                0 0 5px 2px rgba(255,215,0,0.8),
+                0 0 10px 5px rgba(255,255,255,0.5);
+            animation: sparkle-star 2s ease-in-out infinite;
+        }
+
+        @keyframes sparkle-star {
+            0%, 100% { transform: translate(-50%, -50%) rotate(0deg) scale(0.4); opacity: 0.2; }
+            50% { transform: translate(-50%, -50%) rotate(180deg) scale(1.15); opacity: 1; }
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: absolute;
+            bottom: calc(100% + 20px);
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background: rgba(255,255,255,0.95);
+            padding: 14px 20px;
+            border-radius: 16px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2), 0 0 0 1px rgba(255,255,255,0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 1001;
+            min-width: 200px;
+            pointer-events: none;
+            backdrop-filter: blur(10px);
+        }
+
+        .flower:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 10px solid transparent;
+            border-top-color: rgba(255,255,255,0.95);
+        }
+
+        .tooltip h4 {
+            color: #c0392b;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            font-family: 'Noto Serif SC', serif;
+        }
+
+        .tooltip .meaning {
+            color: #e74c3c;
+            font-style: italic;
+            font-size: 0.9rem;
+            padding-top: 8px;
+            border-top: 1px dashed #f0b8b8;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .tooltip .tooltip-image {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        /* ===== 礼物盒 ===== */
+        .gift-box {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 180px;
+            height: 110px;
+            cursor: pointer;
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+
+        .gift-box:hover {
+            transform: translateX(-50%) scale(1.05);
+        }
+
+        .gift-box.open {
+            animation: boxShake 0.5s ease;
+        }
+
+        @keyframes boxShake {
+            0%, 100% { transform: translateX(-50%) rotate(0deg); }
+            25% { transform: translateX(-50%) rotate(-5deg); }
+            75% { transform: translateX(-50%) rotate(5deg); }
+        }
+
+        .box-body {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 85px;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 
+                0 15px 40px rgba(0,0,0,0.4),
+                inset 0 -5px 15px rgba(0,0,0,0.2),
+                inset 0 5px 15px rgba(255,255,255,0.1);
+        }
+
+        .box-body::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 12px,
+                rgba(255,255,255,0.06) 12px,
+                rgba(255,255,255,0.06) 24px
+            );
+        }
+
+        .box-ribbon-v {
+            position: absolute;
+            width: 18px;
+            height: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(to right, #f1c40f, #f39c12, #f1c40f);
+            box-shadow: 0 0 10px rgba(241,196,15,0.3);
+        }
+
+        .box-ribbon-h {
+            position: absolute;
+            width: 100%;
+            height: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(to bottom, #f1c40f, #f39c12, #f1c40f);
+            box-shadow: 0 0 10px rgba(241,196,15,0.3);
+        }
+
+        .box-bow {
+            position: absolute;
+            top: -22px;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+
+        .gift-box.open .box-bow {
+            transform: translateX(-50%) translateY(-50px) rotate(-15deg);
+            opacity: 0;
+        }
+
+        .bow-loop {
+            position: absolute;
+            background: linear-gradient(to bottom, #f1c40f, #e67e22);
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .bow-loop:nth-child(1) {
+            width: 40px; height: 32px;
+            left: -45px;
+            transform: rotate(-25deg);
+        }
+        .bow-loop:nth-child(2) {
+            width: 40px; height: 32px;
+            right: -45px;
+            transform: rotate(25deg);
+        }
+        .bow-center {
+            width: 20px; height: 20px;
+            background: linear-gradient(to bottom, #e67e22, #d35400);
+            border-radius: 50%;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+
+        /* ===== 情书卡片 ===== */
+        .love-card {
+            position: absolute;
+            bottom: 120px;
+            left: 50%;
+            transform: translateX(-50%) scale(0);
+            width: 280px;
+            background: linear-gradient(135deg, #fff8f0, #fff0f5);
+            padding: 28px;
+            border-radius: 20px;
+            box-shadow: 0 25px 70px rgba(0,0,0,0.35);
+            z-index: 200;
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            text-align: center;
+            border: 1px solid rgba(255,215,0,0.25);
+            pointer-events: auto;
+        }
+
+        .love-card.show {
+            transform: translateX(-50%) scale(1);
+            z-index: 1100;
+        }
+
+        .love-card h3 {
+            font-family: 'Great Vibes', cursive;
+            color: #c0392b;
+            font-size: 2rem;
+            margin-bottom: 14px;
+        }
+
+        .love-card p {
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.9;
+            font-family: 'Noto Serif SC', serif;
+        }
+
+        .love-card .heart-signature {
+            color: #ff6b9d;
+            font-size: 1.1rem;
+            margin-top: 16px;
+            font-family: 'Great Vibes', cursive;
+            text-shadow: 0 0 10px rgba(255,107,157,0.5), 0 2px 4px rgba(0,0,0,0.2);
+            white-space: nowrap;
+        }
+
+        /* ===== 飘落花瓣 ===== */
+        .falling-petals {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 999;
+            overflow: hidden;
+        }
+
+        .petal-fall {
+            position: absolute;
+            opacity: 0.7;
+            animation: fall linear infinite;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg) translateX(0);
+                opacity: 0;
+            }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.6; }
+            100% {
+                transform: translateY(100vh) rotate(720deg) translateX(50px);
+                opacity: 0;
+            }
+        }
+
+        /* ===== 闪烁星光 ===== */
+        .sparkle {
+            position: fixed;
+            border-radius: 50%;
+            animation: sparkle 3s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 998;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+            50% { opacity: 1; transform: scale(1) rotate(180deg); }
+        }
+
+        /* ===== 核心动画 ===== */
+        @keyframes bloomIn {
+            0% { opacity: 0; transform: scale(0) rotate(-20deg); }
+            60% { transform: scale(1.1) rotate(5deg); }
+            100% { opacity: 1; transform: scale(1) rotate(0deg); }
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: rotate(-2deg) translateX(-1px); }
+            50% { transform: rotate(2deg) translateX(1px); }
+        }
+
+        /* ===== 花朵配色 ===== */
+        .petal-rose { border-radius: 50% 50% 50% 50%; }
+        .petal-tulip { border-radius: 30% 30% 50% 50%; }
+        .petal-daisy { border-radius: 50%; }
+        .petal-lavender { border-radius: 50% 50% 30% 30%; }
+        .petal-lily { border-radius: 50% 50% 30% 30%; }
+        .petal-sunflower { border-radius: 50%; }
+        .petal-hydrangea { border-radius: 50%; }
+        .petal-carnation { border-radius: 50% 50% 50% 50%; }
+        .petal-cherry { border-radius: 50%; }
+        .petal-orchid { border-radius: 50% 0 50% 0; }
+        .petal-peony { border-radius: 50%; }
+        .petal-lotus { border-radius: 50% 50% 0 50%; }
+        .petal-flower5 { border-radius: 50%; }
+
+        .flower-rose-red .petal-rose { background: linear-gradient(135deg, #ff4757, #c0392b); }
+        .flower-rose-red .flower-center { background: radial-gradient(circle, #f1c40f, #f39c12); }
+        .flower-rose-pink .petal-rose { background: linear-gradient(135deg, #ff6b81, #e84393); }
+        .flower-rose-pink .flower-center { background: radial-gradient(circle, #f1c40f, #f39c12); }
+        .flower-rose-white .petal-rose { background: linear-gradient(135deg, #ffffff, #ecf0f1); }
+        .flower-rose-white .flower-center { background: radial-gradient(circle, #f1c40f, #f39c12); }
+        .flower-rose-orange .petal-rose { background: linear-gradient(135deg, #ff9f43, #ee5a24); }
+        .flower-rose-orange .flower-center { background: radial-gradient(circle, #f1c40f, #f39c12); }
+
+        .flower-tulip-red .petal-tulip { background: linear-gradient(135deg, #ff4757, #c0392b); }
+        .flower-tulip-red .flower-center { background: radial-gradient(circle, #922b21, #641e16); }
+        .flower-tulip-yellow .petal-tulip { background: linear-gradient(135deg, #f1c40f, #f39c12); }
+        .flower-tulip-yellow .flower-center { background: radial-gradient(circle, #f57f17, #e65100); }
+        .flower-tulip-pink .petal-tulip { background: linear-gradient(135deg, #ff6b81, #e84393); }
+        .flower-tulip-pink .flower-center { background: radial-gradient(circle, #c0392b, #922b21); }
+        .flower-tulip-purple .petal-tulip { background: linear-gradient(135deg, #a55eea, #8854d0); }
+        .flower-tulip-purple .flower-center { background: radial-gradient(circle, #5f27cd, #341f97); }
+        .flower-tulip-orange .petal-tulip { background: linear-gradient(135deg, #ff9f43, #ee5a24); }
+        .flower-tulip-orange .flower-center { background: radial-gradient(circle, #d35400, #a04000); }
+
+        .flower-daisy-white .petal-daisy { background: linear-gradient(135deg, #ffffff, #f5f5f5); }
+        .flower-daisy-white .flower-center { background: radial-gradient(circle, #f1c40f, #f39c12); }
+        .flower-daisy-yellow .petal-daisy { background: linear-gradient(135deg, #f1c40f, #f39c12); }
+        .flower-daisy-yellow .flower-center { background: radial-gradient(circle, #d35400, #a04000); }
+
+        .flower-lavender-purple .petal-lavender { background: linear-gradient(135deg, #a55eea, #8854d0); }
+        .flower-lavender-purple .flower-center { background: radial-gradient(circle, #5f27cd, #341f97); }
+
+        .flower-lily-white .petal-lily { background: linear-gradient(135deg, #ffffff, #fafafa); }
+        .flower-lily-white .flower-center { background: radial-gradient(circle, #f1c40f, #f39c12); }
+
+        .flower-sunflower-yellow .petal-sunflower { background: linear-gradient(135deg, #f1c40f, #d4ac0d); }
+        .flower-sunflower-yellow .flower-center { background: radial-gradient(circle, #6d4c00, #4a3800); }
+
+        .flower-hydrangea-blue .petal-hydrangea { background: linear-gradient(135deg, #74b9ff, #0984e3); }
+        .flower-hydrangea-blue .flower-center { background: radial-gradient(circle, #0652DD, #1B1464); }
+        .flower-hydrangea-pink .petal-hydrangea { background: linear-gradient(135deg, #ff6b81, #e84393); }
+        .flower-hydrangea-pink .flower-center { background: radial-gradient(circle, #c0392b, #922b21); }
+
+        .flower-carnation-red .petal-carnation { background: linear-gradient(135deg, #ff4757, #c0392b); }
+        .flower-carnation-red .flower-center { background: radial-gradient(circle, #ff6b81, #e84393); }
+        .flower-carnation-pink .petal-carnation { background: linear-gradient(135deg, #ff6b81, #e84393); }
+        .flower-carnation-pink .flower-center { background: radial-gradient(circle, #fd79a8, #e84393); }
+
+        .flower-cherry-pink .petal-cherry { background: linear-gradient(135deg, #ffb3c1, #ff8a9b); }
+        .flower-cherry-pink .flower-center { background: radial-gradient(circle, #ffd54f, #ffca28); }
+        .flower-cherry-white .petal-cherry { background: linear-gradient(135deg, #ffffff, #fff0f5); }
+        .flower-cherry-white .flower-center { background: radial-gradient(circle, #ffd54f, #ffca28); }
+
+        .flower-orchid-purple .petal-orchid { background: linear-gradient(135deg, #a55eea, #8854d0); }
+        .flower-orchid-purple .flower-center { background: radial-gradient(circle, #ffd54f, #ffca28); }
+        .flower-orchid-pink .petal-orchid { background: linear-gradient(135deg, #ff6b81, #e84393); }
+        .flower-orchid-pink .flower-center { background: radial-gradient(circle, #ffd54f, #ffca28); }
+
+        .flower-peony-pink .petal-peony { background: linear-gradient(135deg, #ffb3c1, #ff8a9b); }
+        .flower-peony-pink .flower-center { background: radial-gradient(circle, #ffd54f, #ffca28); }
+        .flower-peony-red .petal-peony { background: linear-gradient(135deg, #ff4757, #c0392b); }
+        .flower-peony-red .flower-center { background: radial-gradient(circle, #ffd54f, #ffca28); }
+
+        .flower-lotus-pink .petal-lotus { background: linear-gradient(135deg, #ffb3c1, #ff8a9b); }
+        .flower-lotus-pink .flower-center { background: radial-gradient(circle, #ffd54f, #ffca28); }
+
+        .flower-flower5-red .petal-flower5 { background: linear-gradient(135deg, #ff4757, #c0392b); }
+        .flower-flower5-red .flower-center { background: radial-gradient(circle, #f1c40f, #f39c12); }
+        .flower-flower5-yellow .petal-flower5 { background: linear-gradient(135deg, #f1c40f, #f39c12); }
+        .flower-flower5-yellow .flower-center { background: radial-gradient(circle, #d35400, #a04000); }
+
+        /* ===== 响应式 ===== */
+        .music-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+        }
+
+        .music-btn.playing {
+            animation: musicSpin 3s linear infinite;
+        }
+
+        @keyframes musicSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .music-btn.playing:hover {
+            animation-play-state: paused;
+        }
+
+        @media (max-width: 768px) {
+            .recipient { font-size: 2.8rem; }
+            .love-number { font-size: 2rem; }
+            .subtitle { font-size: 0.85rem; letter-spacing: 4px; }
+            .bouquet-wrapper { height: 520px; }
+            .gift-box { width: 140px; height: 90px; }
+            .box-body { height: 70px; }
+            .love-card { width: 240px; padding: 20px; }
+            .wrapper-paper { width: 260px; height: 220px; }
+        }
+
+        @media (max-width: 480px) {
+            .recipient { font-size: 2.2rem; }
+            .love-number { font-size: 1.6rem; }
+            .bouquet-wrapper { height: 450px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 背景光斑 -->
+    <div class="ambient-light">
+        <div class="light-orb"></div>
+        <div class="light-orb"></div>
+        <div class="light-orb"></div>
+    </div>
+
+    <!-- 飘落花瓣层 -->
+    <div class="falling-petals" id="fallingPetals"></div>
+
+    <!-- 标题 -->
+    <div class="header">
+        <div class="recipient">to 盲目吃鱼之神</div>
+        <div class="love-number">第120天快乐</div>
+        <div class="subtitle">from shinono</div>
+    </div>
+
+    <!-- 花束主体 -->
+    <div class="bouquet-wrapper" id="bouquetWrapper">
+        <div class="bouquet-container" id="bouquetContainer">
+            <!-- 包装纸与丝带 -->
+            <div class="wrapper-paper"></div>
+            <div class="wrapper-ribbon"></div>
+
+            <!-- 礼物盒 -->
+            <div class="gift-box" id="giftBox">
+                <div class="box-bow">
+                    <div class="bow-loop"></div>
+                    <div class="bow-loop"></div>
+                    <div class="bow-center"></div>
+                </div>
+                <div class="box-body">
+                    <div class="box-ribbon-v"></div>
+                    <div class="box-ribbon-h"></div>
+                </div>
+            </div>
+
+            <!-- 情书卡片 -->
+            <div class="love-card" id="loveCard">
+                <h3>2026.1.20-2026.5.20</h3>
+                <p>120天，<br>每天都比昨天更爱你！</p>
+                <div class="heart-signature">❤️ Love You Forever ❤️</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="base64_data.js"></script>
+    <script>
+        // ===== 花束配置 =====
+        const centerX = 450;
+        const centerY = 580;
+        const minRadius = 50;
+        const maxRadius = 360;
+
+        const flowerPhotoMap = {
+            'tulip-purple': flowerPhotoBase64['tulip-purple'],
+            'tulip-yellow': flowerPhotoBase64['tulip-yellow'],
+            'orchid-purple': flowerPhotoBase64['orchid-purple'],
+            'tulip-orange': flowerPhotoBase64['tulip-orange'],
+            'rose-pink': flowerPhotoBase64['rose-pink']
+        };
+
+        const flowerTypes = [
+            { type: 'rose-red', name: '红玫瑰', meaning: '热烈的爱', petalClass: 'petal-rose', petalCount: 5, sizeRange: [28, 42], density: 1.0 },
+            { type: 'rose-pink', name: '粉玫瑰', meaning: '温柔的爱', petalClass: 'petal-rose', petalCount: 5, sizeRange: [26, 40], density: 1.0 },
+            { type: 'rose-white', name: '白玫瑰', meaning: '纯洁的爱', petalClass: 'petal-rose', petalCount: 5, sizeRange: [24, 38], density: 1.0 },
+            { type: 'rose-orange', name: '香槟玫瑰', meaning: '珍藏的爱', petalClass: 'petal-rose', petalCount: 5, sizeRange: [26, 40], density: 1.0 },
+            { type: 'tulip-red', name: '红郁金香', meaning: '完美的爱', petalClass: 'petal-tulip', petalCount: 6, sizeRange: [22, 36], density: 1.0 },
+            { type: 'tulip-yellow', name: '黄郁金香', meaning: '阳光般的爱', petalClass: 'petal-tulip', petalCount: 6, sizeRange: [22, 36], density: 1.0 },
+            { type: 'tulip-pink', name: '粉郁金香', meaning: '幸福的爱', petalClass: 'petal-tulip', petalCount: 6, sizeRange: [22, 36], density: 1.0 },
+            { type: 'tulip-purple', name: '紫郁金香', meaning: '神秘的爱', petalClass: 'petal-tulip', petalCount: 6, sizeRange: [22, 36], density: 1.0 },
+            { type: 'tulip-orange', name: '橙郁金香', meaning: '热情的爱', petalClass: 'petal-tulip', petalCount: 6, sizeRange: [22, 36], density: 1.0 },
+            { type: 'daisy-white', name: '小雏菊', meaning: '天真的爱', petalClass: 'petal-daisy', petalCount: 8, sizeRange: [14, 24], density: 1.5 },
+            { type: 'daisy-yellow', name: '小黄菊', meaning: '活力青春', petalClass: 'petal-daisy', petalCount: 8, sizeRange: [14, 24], density: 1.5 },
+            { type: 'lavender-purple', name: '薰衣草', meaning: '浪漫等待', petalClass: 'petal-lavender', petalCount: 7, sizeRange: [10, 18], density: 2.0 },
+            { type: 'lily-white', name: '百合花', meaning: '纯洁高贵', petalClass: 'petal-lily', petalCount: 6, sizeRange: [28, 44], density: 0.8 },
+            { type: 'sunflower-yellow', name: '向日葵', meaning: '忠诚追随', petalClass: 'petal-sunflower', petalCount: 10, sizeRange: [24, 38], density: 0.8 },
+            { type: 'hydrangea-blue', name: '蓝绣球', meaning: '美满团圆', petalClass: 'petal-hydrangea', petalCount: 8, sizeRange: [12, 22], density: 1.8 },
+            { type: 'hydrangea-pink', name: '粉绣球', meaning: '浪漫甜蜜', petalClass: 'petal-hydrangea', petalCount: 8, sizeRange: [12, 22], density: 1.8 },
+            { type: 'carnation-red', name: '红康乃馨', meaning: '炽热心动', petalClass: 'petal-carnation', petalCount: 5, sizeRange: [18, 30], density: 1.2 },
+            { type: 'carnation-pink', name: '粉康乃馨', meaning: '甜蜜眷恋', petalClass: 'petal-carnation', petalCount: 5, sizeRange: [18, 30], density: 1.2 },
+            { type: 'cherry-pink', name: '樱花', meaning: '浪漫爱情', petalClass: 'petal-cherry', petalCount: 5, sizeRange: [16, 28], density: 1.5 },
+            { type: 'cherry-white', name: '白樱花', meaning: '纯洁高雅', petalClass: 'petal-cherry', petalCount: 5, sizeRange: [16, 28], density: 1.5 },
+            { type: 'orchid-purple', name: '紫罗兰', meaning: '神秘优雅', petalClass: 'petal-orchid', petalCount: 5, sizeRange: [20, 32], density: 1.2 },
+            { type: 'orchid-pink', name: '粉兰', meaning: '优雅高贵', petalClass: 'petal-orchid', petalCount: 5, sizeRange: [20, 32], density: 1.2 },
+            { type: 'peony-pink', name: '粉色牡丹', meaning: '富贵吉祥', petalClass: 'petal-peony', petalCount: 8, sizeRange: [26, 42], density: 0.8 },
+            { type: 'peony-red', name: '红色牡丹', meaning: '荣华富贵', petalClass: 'petal-peony', petalCount: 8, sizeRange: [26, 42], density: 0.8 },
+            { type: 'lotus-pink', name: '荷花', meaning: '出淤泥不染', petalClass: 'petal-lotus', petalCount: 6, sizeRange: [22, 36], density: 1.0 },
+            { type: 'flower5-red', name: '五瓣红花', meaning: '热情奔放', petalClass: 'petal-flower5', petalCount: 5, sizeRange: [14, 24], density: 1.5 },
+            { type: 'flower5-yellow', name: '五瓣黄花', meaning: '阳光活力', petalClass: 'petal-flower5', petalCount: 5, sizeRange: [14, 24], density: 1.5 }
+        ];
+
+        // ===== 生成花束（水滴形分布） =====
+        const flowers = [];
+        const baseCount = 100;
+        let totalDensity = flowerTypes.reduce((sum, t) => sum + t.density, 0);
+
+        flowerTypes.forEach(flowerType => {
+            const count = Math.round(baseCount * (flowerType.density / totalDensity));
+            for (let i = 0; i < count; i++) {
+                const t = Math.random();
+                const radius = minRadius + (maxRadius - minRadius) * Math.pow(t, 0.7);
+
+                const angleSpread = 60 + (radius / maxRadius) * 100;
+                const angleDeg = (Math.random() * angleSpread - angleSpread / 2 - 90);
+                const angleRad = angleDeg * (Math.PI / 180);
+
+                const x = centerX + Math.cos(angleRad) * radius + (Math.random() - 0.5) * 40;
+                const y = centerY + Math.sin(angleRad) * radius * 0.85 + (Math.random() - 0.5) * 30;
+
+                const sizeBase = flowerType.sizeRange[0] + Math.random() * (flowerType.sizeRange[1] - flowerType.sizeRange[0]);
+                const depthFactor = 1 + (1 - t) * 0.3;
+
+                flowers.push({
+                    ...flowerType,
+                    x: x,
+                    y: y,
+                    petalSize: { width: sizeBase * depthFactor, height: sizeBase * 1.5 * depthFactor },
+                    centerSize: sizeBase * 0.5 * depthFactor,
+                    rotation: Math.random() * 360,
+                    delay: Math.random() * 2.5,
+                    swayOffset: Math.random() * 4
+                });
+            }
+        });
+
+        // ===== 创建花朵元素 =====
+        function createFlower(flower, index) {
+            const highlightedTypes = ['tulip-purple', 'tulip-yellow', 'orchid-purple', 'tulip-orange', 'rose-pink'];
+            const isHighlighted = highlightedTypes.includes(flower.type);
+
+            const flowerEl = document.createElement('div');
+            flowerEl.className = `flower flower-${flower.type}${isHighlighted ? ' highlight' : ''}`;
+            flowerEl.style.left = (flower.x - flower.petalSize.width) + 'px';
+            flowerEl.style.top = (flower.y - flower.petalSize.height) + 'px';
+            flowerEl.style.zIndex = 10 + index;
+            flowerEl.style.animationDelay = `${flower.delay}s, ${flower.swayOffset}s`;
+
+            const petalsHtml = Array.from({ length: flower.petalCount }, (_, i) => {
+                const angle = (360 / flower.petalCount) * i;
+                let translateY = '-5px';
+                if (['petal-daisy','petal-sunflower','petal-lavender','petal-hydrangea','petal-cherry','petal-flower5'].includes(flower.petalClass)) {
+                    translateY = '-3px';
+                } else if (flower.petalClass === 'petal-orchid') {
+                    translateY = '-6px';
+                } else if (flower.petalClass === 'petal-lotus') {
+                    translateY = '-10px';
+                }
+                return `<div class="petal ${flower.petalClass}" style="
+                    width: ${flower.petalSize.width}px;
+                    height: ${flower.petalSize.height}px;
+                    transform: rotate(${angle}deg) translateY(${translateY});
+                "></div>`;
+            }).join('');
+
+            const photoSrc = flowerPhotoBase64[flower.type];
+            const tooltipHtml = photoSrc
+                ? `<div class="tooltip"><img src="${photoSrc}" class="tooltip-image" alt="${flower.name}"></div>`
+                : '';
+
+            flowerEl.innerHTML = `
+                <div class="flower-top" style="
+                    width: ${flower.petalSize.width * 2.5}px; 
+                    height: ${flower.petalSize.height * 2}px;
+                    transform: rotate(${flower.rotation}deg);
+                ">
+                    ${petalsHtml}
+                    <div class="flower-center" style="
+                        width: ${flower.centerSize}px;
+                        height: ${flower.centerSize}px;
+                        top: 50%; left: 50%;
+                        transform: translate(-50%, -50%);
+                    "></div>
+                    ${isHighlighted ? '<div class="flower-sparkle"></div>' : ''}
+                </div>
+                ${tooltipHtml}
+            `;
+
+            return flowerEl;
+        }
+
+        // ===== 渲染花束 =====
+        function renderBouquet() {
+            const container = document.getElementById('bouquetContainer');
+            const sortedFlowers = [...flowers].sort((a, b) => a.y - b.y);
+
+            sortedFlowers.forEach((flower, index) => {
+                const flowerEl = createFlower(flower, index);
+                container.appendChild(flowerEl);
+            });
+        }
+
+        // ===== 飘落花瓣系统 =====
+        function createFallingPetals() {
+            const container = document.getElementById('fallingPetals');
+            const colors = [
+                '#ff4757', '#ff6b81', '#f1c40f', '#a55eea', 
+                '#ffffff', '#74b9ff', '#ff9f43', '#ffb3c1', '#ffd54f',
+                '#ff8a9b', '#e84393', '#f39c12'
+            ];
+
+            const shapes = [
+                '50% 0 50% 50%', '50%', '0 50% 50% 50%', '50% 50% 0 50%'
+            ];
+
+            setInterval(() => {
+                const petal = document.createElement('div');
+                petal.className = 'petal-fall';
+                petal.style.left = Math.random() * 100 + '%';
+                petal.style.background = colors[Math.floor(Math.random() * colors.length)];
+                petal.style.width = (Math.random() * 12 + 8) + 'px';
+                petal.style.height = (Math.random() * 14 + 10) + 'px';
+                petal.style.borderRadius = shapes[Math.floor(Math.random() * shapes.length)];
+                petal.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                petal.style.animationDelay = (Math.random() * 2) + 's';
+                petal.style.opacity = Math.random() * 0.5 + 0.3;
+
+                container.appendChild(petal);
+
+                setTimeout(() => {
+                    petal.remove();
+                }, 10000);
+            }, 200);
+        }
+
+        // ===== 星光系统 =====
+        function createSparkles() {
+            const colors = ['#ffd700', '#ffffff', '#ff4757', '#a55eea', '#ff6b81', '#74b9ff'];
+
+            for (let i = 0; i < 50; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 100 + '%';
+                sparkle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                sparkle.style.animationDelay = Math.random() * 4 + 's';
+                sparkle.style.animationDuration = (2 + Math.random() * 2) + 's';
+                sparkle.style.width = (Math.random() * 4 + 2) + 'px';
+                sparkle.style.height = sparkle.style.width;
+
+                if (Math.random() > 0.5) {
+                    sparkle.style.boxShadow = `0 0 4px currentColor, 0 0 8px currentColor`;
+                }
+
+                document.body.appendChild(sparkle);
+            }
+        }
+
+        // ===== 礼物盒交互 =====
+        function initGiftBox() {
+            const giftBox = document.getElementById('giftBox');
+            const loveCard = document.getElementById('loveCard');
+            let isOpen = false;
+
+            giftBox.addEventListener('click', () => {
+                if (!isOpen) {
+                    giftBox.classList.add('open');
+                    setTimeout(() => {
+                        loveCard.classList.add('show');
+                    }, 300);
+                    isOpen = true;
+                } else {
+                    loveCard.classList.remove('show');
+                    setTimeout(() => {
+                        giftBox.classList.remove('open');
+                    }, 200);
+                    isOpen = false;
+                }
+            });
+        }
+
+        // ===== 鼠标视差效果 =====
+        function initParallax() {
+            const wrapper = document.getElementById('bouquetWrapper');
+            const header = document.querySelector('.header');
+
+            document.addEventListener('mousemove', (e) => {
+                const x = (e.clientX / window.innerWidth - 0.5) * 20;
+                const y = (e.clientY / window.innerHeight - 0.5) * 10;
+
+                wrapper.style.transform = `translate(${x * 0.5}px, ${y * 0.5}px)`;
+                header.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+            });
+        }
+
+        function initMusic() {
+            const music = document.getElementById('bgMusic');
+            const musicBtn = document.getElementById('musicBtn');
+
+            music.play().catch(() => {});
+
+            music.addEventListener('playing', () => {
+                musicBtn.classList.add('playing');
+            });
+
+            music.addEventListener('pause', () => {
+                musicBtn.classList.remove('playing');
+            });
+
+            musicBtn.addEventListener('click', () => {
+                if (music.paused) {
+                    music.play();
+                } else {
+                    music.pause();
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderBouquet();
+            createFallingPetals();
+            createSparkles();
+            initGiftBox();
+            initParallax();
+            initMusic();
+        });
+    </script>
+    <audio id="bgMusic" loop>
+        <source src="M500002pkhwP2bQPat.mp3" type="audio/mpeg">
+    </audio>
+    <div class="music-btn" id="musicBtn">🎵</div>
+</body>
+</html>
